@@ -15,6 +15,9 @@ make
 
 It will generate vision_utils.wasm.
 
+## Run the react app
+Make sure you have done "nvm use v16.13.2"
+
 ## Reference
 
 [1] https://github.com/taylorjg/emscripten-opencv
