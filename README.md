@@ -14,3 +14,7 @@ make
 ```
 
 It will generate vision_utils.wasm.
+
+## Reference
+
+[1] https://github.com/taylorjg/emscripten-opencv
