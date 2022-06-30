@@ -7,15 +7,15 @@ This repo contains an example that compile OpenCV C++ code into wasm, and runs t
 
 ![alt text](./images/react-wasm.png "Flip Images in React")
 
-## Prerequisite
+## How to build and run?
 
-### Required packages
+### Step 1: Install Required packages
 
 To compile C++ code into wasm and run the React app, we need:
 1. emscripten, install by following instructions in https://emscripten.org/docs/getting_started/downloads.html
 2. node.js
 
-### Compile opencv
+### Step 2: Compile OpenCV
 
 1. `git submodule update --init --recursive` to pull opencv repo
 2. Find out your emscripten path `$EMSCRIPTEN_PATH`
@@ -23,7 +23,7 @@ To compile C++ code into wasm and run the React app, we need:
 
 For linux machine, the common EMSCRIPTEN_PATH is `export EMSCRIPTEN_PATH=~/emsdk/upstream/emscripten`
 
-### [Can Skip] Set up Cpp in VSCode
+### Step 3: [Can Skip] Set up Cpp in VSCode
 
 Modify and add the path to workspace.json.
 ```
@@ -35,7 +35,7 @@ Modify and add the path to workspace.json.
 }
 ```
 
-### Compiler C++ into wasm
+### Step 4: Compile C++ into wasm
 
 ```
 make build-wasm
@@ -43,13 +43,13 @@ make build-wasm
 
 It will generate `vision_utils.js` that gets copied to `app/src`.
 
-### Install React App Deps
+### Step 5: Install React App Deps
 
 ```
 cd app & npm install
 ```
 
-### Run the react app
+### Step 6: Run the react app
 
 ```
 make run-app
@@ -57,5 +57,5 @@ make run-app
 
 ## Reference
 
-[1] https://github.com/taylorjg/emscripten-opencv
-[2] https://blog.logrocket.com/image-styling-and-filters-using-webassembly/
+1. https://github.com/taylorjg/emscripten-opencv
+2. https://blog.logrocket.com/image-styling-and-filters-using-webassembly/
