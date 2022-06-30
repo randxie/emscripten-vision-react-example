@@ -1,5 +1,5 @@
 import exampleImage from "./orange.jpg";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import useImage from "use-image";
 import { Image, Layer, Stage } from "react-konva";
 import "./App.css";

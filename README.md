@@ -2,13 +2,23 @@
 
 ## Prerequisite
 
-1. Install emscripten by following instructions in https://emscripten.org/docs/getting_started/downloads.html
-2. Run build scripts
-3. Build opencv wasm: `EMSCRIPTEN=~/emsdk/upstream/emscripten python3 opencv/platforms/js/build_js.py opencv/build_wasm --build_wasm`
+### Required packages
 
-## Set up Cpp in VSCode
+To compile C++ code into wasm and run the React app, we need:
+1. emscripten, install by following instructions in https://emscripten.org/docs/getting_started/downloads.html
+2. node.js
 
-Add and change the path to workspace.json
+### Compile opencv
+
+1. `git submodule init` to pull opencv repo
+2. Find out your emscripten path `$EMSCRIPTEN_PATH`
+3. Build opencv wasm by running `EMSCRIPTEN=$EMSCRIPTEN_PATH python3 opencv/platforms/js/build_js.py opencv/build_wasm --build_wasm`
+
+For linux machine, the common EMSCRIPTEN_PATH is `export EMSCRIPTEN_PATH=~/emsdk/upstream/emscripten`
+
+### [Can Skip] Set up Cpp in VSCode
+
+Modify and add the path to workspace.json.
 ```
 {
     "C_Cpp.default.includePath": [
@@ -18,18 +28,19 @@ Add and change the path to workspace.json
 }
 ```
 
-## Build wasm
+### Compiler C++ into wasm
 
 ```
-cd build
-emcmake cmake ..
-emmake make
+make build-wasm
 ```
 
-It will generate vision_utils.wasm.
+It will generate `vision_utils.js` that gets copied to `app/src`.
 
-## Run the react app
-Make sure you have done "nvm use v16.13.2"
+### Run the react app
+
+```
+make run-app
+```
 
 ## Reference
 

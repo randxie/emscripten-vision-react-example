@@ -15,9 +15,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-// let VisionModule = require("./vision_utils.js");
-// let Module = await VisionModule();
-// let processImage = VisionModule().cwrap("processImage");
-
-// module.exports = VisionModule;
