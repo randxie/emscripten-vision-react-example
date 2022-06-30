@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 let VisionModule = require("./vision_utils.js");
 
-export const ImageProcessor = (originImgRef, processedImgRef) => {
+export const ImageProcessor = (originImgRef) => {
   const [visionUtilMod, setVisionUtilMod] = useState(null);
+  const processedImgCanvas = document.createElement("canvas");
 
   useEffect(() => {
     (async () => {
@@ -16,7 +17,6 @@ export const ImageProcessor = (originImgRef, processedImgRef) => {
     };
   }, []);
 
-  console.log(originImgRef);
   if (visionUtilMod) {
     if (originImgRef?.current) {
       const canvas = originImgRef.current.toCanvas();
@@ -27,7 +27,8 @@ export const ImageProcessor = (originImgRef, processedImgRef) => {
       const memory = visionUtilMod._malloc(imageData.data.length); // Allocating WASM memory
       visionUtilMod.HEAPU8.set(imageData.data, memory); // Copying JS image data to WASM memory
       visionUtilMod._processImage(memory, imageData.width, imageData.height);
-      console.log(imageData.data.length);
+
+      // copy data from wasm memory to JS image data.
       const finalImage = visionUtilMod.HEAPU8.subarray(
         memory,
         memory + imageData.data.length
@@ -35,16 +36,19 @@ export const ImageProcessor = (originImgRef, processedImgRef) => {
 
       // free memory to prevent browser crash
       visionUtilMod._free(memory); // Freeing WASM memory
-      console.log(imageData.data);
-      console.log(finalImage);
 
-      if (processedImgRef?.current) {
-        const outputCanvas = processedImgRef.current;
-        const outputCtx = outputCanvas.getContext("2d");
-        imageData.data.set(finalImage);
-        console.log(imageData.data);
-        outputCtx.putImageData(imageData, 0, 0);
-      }
+      processedImgCanvas.width = imageData.width;
+      processedImgCanvas.height = imageData.height;
+      const outputCtx = processedImgCanvas.getContext("2d");
+      const processedImg = outputCtx.createImageData(
+        imageData.width,
+        imageData.height
+      );
+
+      processedImg.data.set(finalImage);
+      outputCtx.putImageData(processedImg, 0, 0);
     }
   }
+
+  return processedImgCanvas;
 };

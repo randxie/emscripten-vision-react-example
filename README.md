@@ -6,6 +6,18 @@
 2. Run build scripts
 3. Build opencv wasm: `EMSCRIPTEN=~/emsdk/upstream/emscripten python3 opencv/platforms/js/build_js.py opencv/build_wasm --build_wasm`
 
+## Set up Cpp in VSCode
+
+Add and change the path to workspace.json
+```
+{
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/opencv/include",
+        "/home/randxie/emsdk/upstream/emscripten/system/include",
+    ],
+}
+```
+
 ## Build wasm
 
 ```
