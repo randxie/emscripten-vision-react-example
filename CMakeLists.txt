@@ -11,9 +11,6 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif(NOT CMAKE_BUILD_TYPE)
 
-# Does not work
-# find_package(OpenCV REQUIRED PATHS "${OPENCV_DIR}/build_wasm" NO_DEFAULT_PATH)
-
 # Needed for opencv2/opencv.hpp
 include_directories("${OPENCV_DIR}/include")
 
@@ -38,4 +35,4 @@ file(GLOB opencv_lib_core "${OPENCV_DIR}/build_wasm/lib/libopencv_core.a")
 target_link_libraries(vision_utils ${opencv_lib_core})
 
 # Specify linker arguments
-set_target_properties(vision_utils PROPERTIES LINK_FLAGS "-s EXPORTED_RUNTIME_METHODS=cwrap -s EXPORTED_FUNCTIONS=_free -s MODULARIZE=1 -s EXPORT_NAME=createWebVisionModule")
+set_target_properties(vision_utils PROPERTIES LINK_FLAGS "-s SINGLE_FILE -s EXPORTED_RUNTIME_METHODS=['cwrap','ccall'] -s EXPORTED_FUNCTIONS=['_free'] -s MODULARIZE=1 -s EXPORT_NAME=createWebVisionModule")

@@ -9,9 +9,8 @@ function App() {
   const originalImgRef = useRef(null);
   const processedImgRef = useRef(null);
   const [image, _] = useImage(exampleImage, "Anonymous");
-  const [processedImage, status] = useImage(exampleImage, "Anonymous");
   
-  ImageProcessor(processedImgRef);
+  ImageProcessor(originalImgRef, processedImgRef);
 
   return (
     <div className="App">
@@ -31,18 +30,8 @@ function App() {
             draggable={false}
           />
         </Layer>
-        <Layer imageSmoothingEnabled={false}>
-          <Image
-            ref={processedImgRef}
-            x={processedImage ? processedImage.width + 10 : 0}
-            y={0}
-            width={processedImage ? processedImage.width : 0}
-            height={processedImage ? processedImage.height : 0}
-            image={processedImage}
-            draggable={false}
-          />
-        </Layer>
       </Stage>
+      <canvas ref={processedImgRef} />
     </div>
   );
 }
