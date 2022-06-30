@@ -1,4 +1,4 @@
-import exampleImage from "./orange.jpg";
+import exampleImage from "./lena.png";
 import React, { useRef } from "react";
 import useImage from "use-image";
 import { Image, Layer, Stage } from "react-konva";

@@ -1,4 +1,11 @@
-# emscripten-vision
+# emscripten-vision-react-example
+
+This repo contains an example that compile OpenCV C++ code into wasm, and runs the generated wasm code in React app. It includes:
+
+* How to set up build to generate wasm from custom opencv C++ code
+* How to load wasm into react and call the custom functions.
+
+![alt text](./images/react-wasm.png "Flip Images in React")
 
 ## Prerequisite
 
@@ -10,7 +17,7 @@ To compile C++ code into wasm and run the React app, we need:
 
 ### Compile opencv
 
-1. `git submodule init` to pull opencv repo
+1. `git submodule update --init --recursive` to pull opencv repo
 2. Find out your emscripten path `$EMSCRIPTEN_PATH`
 3. Build opencv wasm by running `EMSCRIPTEN=$EMSCRIPTEN_PATH python3 opencv/platforms/js/build_js.py opencv/build_wasm --build_wasm`
 
@@ -35,6 +42,12 @@ make build-wasm
 ```
 
 It will generate `vision_utils.js` that gets copied to `app/src`.
+
+### Install React App Deps
+
+```
+cd app & npm install
+```
 
 ### Run the react app
 
